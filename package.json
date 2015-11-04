@@ -1,11 +1,12 @@
 {
   "name": "data-field-string",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "sethvincent",
   "bugs": {
     "url": "https://github.com/editdata/data-field-string/issues"
   },
   "dependencies": {
+    "component-emitter": "^1.2.0",
     "data-field-classname": "^1.0.0",
     "xtend": "^4.0.0"
   },

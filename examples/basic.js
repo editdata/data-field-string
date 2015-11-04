@@ -1,24 +1,30 @@
 var vraf = require('virtual-raf')
 var h = require('virtual-dom/h')
-var stringField = require('../index')
+var createField = require('../index')
+
+function inputField (state) {
+  var field = createField()
+
+  field.on('update', function (e, value) {
+    tree.update({ message: value })
+  })
+
+  return field.render(h, { value: state.message })
+}
+
+function displayField (state) {
+  var field = createField(h, {
+    display: true
+  })
+
+  return field.render(h, { value: state.message })
+}
 
 function render (state) {
-  var elements = []
-
-  elements.push(stringField(h, {
-    display: true,
-    value: state.message,
-    onclick: function (e) { console.log('display', e.target.value) }
-  }))
-
-  elements.push(stringField(h, {
-    value: state.message,
-    oninput: function (e) {
-      tree.update({ message: e.target.value })
-    }
-  }))
-
-  return h('div.fields', elements)
+  return h('div.fields', [
+    inputField(state),
+    displayField(state)
+  ])
 }
 
 var tree = vraf({ message: 'hi' }, render, require('virtual-dom'))

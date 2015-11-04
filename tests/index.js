@@ -3,16 +3,18 @@ var h = require('virtual-dom/h')
 var createField = require('../index')
 
 test('create an input field', function (t) {
-  var field = createField(h, { value: 'example' })
-  t.equal(field.tagName, 'TEXTAREA')
+  var field = createField()
+  var vtree = field.render(h, { value: 'example' })
+  t.equal(vtree.tagName, 'TEXTAREA')
   t.end()
 })
 
 test('create a display field', function (t) {
-  var field = createField(h, {
+  var field = createField()
+  var vtree = field.render(h, {
     value: 'example',
     display: true
   })
-  t.equal(field.tagName, 'DIV')
+  t.equal(vtree.tagName, 'DIV')
   t.end()
 })
